@@ -188,24 +188,6 @@ jobs:
           # start_date: Enter the planned start date
           # end_date: Enter the planned end date
 
-      - name: ServiceNow Change
-        id: change
-        uses: ServiceNow/servicenow-devops-change@v6.1.0
-        with:
-          devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}   # ← 너의 env secret 이름과 일치
-          instance-url: ${{ secrets.SN_INSTANCE_URL }}
-          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-          context-github: ${{ toJSON(github) }}
-          job-name: 'ServiceNow DevOps Change'
-          change-request: >-
-            {"attributes":{
-              "chg_model":"<chg_model_sys_id>",
-              "requested_by":"<user_sys_id>",
-              "assignment_group":"<group_sys_id>",
-              "short_description":"Automated Software Deployment",
-              "description":"Automated Software Deployment."
-            }}
-
       - name: Print change outputs
         run: |
           echo "status=${{ steps.change.outputs.status }}"
