@@ -2,7 +2,8 @@
 
 name: CICD GitHub workflow
 
-on: #workflow_dispatch
+on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
   # pull_request:
@@ -74,14 +75,13 @@ jobs:
           # Github Context
           context-github: ${{ toJSON(github) }}
           # List of Artifacts to be registered
-          artifacts: '[
-              {
-                  "name": "app-devops-cicd.jar",
-                  "version": "1.${{ github.run_number }}",
-                  "semanticVersion": "1.${{ github.run_number }}.0",
-                  "repositoryName": "${{ github.repository }}"
-              }
-          ]'
+          artifacts: >-
+            [{
+              "name": "app-devops-cicd.jar",
+              "version": "1.${{ github.run_number }}",
+              "semanticVersion": "1.${{ github.run_number }}.0",
+              "repositoryName": "${{ github.repository }}"
+            }]
 
   # sonarScan:
   #   name: 'Sonar Scan'
@@ -147,16 +147,17 @@ jobs:
           # Github Context
           context-github: ${{ toJSON(github) }}
           # List of Artifacts in JSON format
-          artifacts: '[
-              {
-                  "name": "app-devops-cicd.jar",
-                  "version": "1.${{ github.run_number }}",
-                  "semanticVersion": "1.${{ github.run_number }}.0",
-                  "repositoryName": "${{ github.repository }}"
-              }
-          ]'
+          artifacts: >-
+            [{
+              "name": "app-devops-cicd.jar",
+              "version": "1.${{ github.run_number }}",
+              "semanticVersion": "1.${{ github.run_number }}.0",
+              "repositoryName": "${{ github.repository }}"
+            }]
+
           # Name of the Package that contains list of artifacts
           package-name: 'app-devops-change-velocity-cicd.war'
+
           # Display Name of Job
           job-name: 'Register Package'
           
