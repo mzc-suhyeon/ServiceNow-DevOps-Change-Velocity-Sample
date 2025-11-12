@@ -169,6 +169,7 @@ jobs:
     name: 'ServiceNow DevOps Change'
     steps:
       - name: ServiceNow Change
+        id: change
         uses: ServiceNow/servicenow-devops-change@v6.1.0
         with:
           # Devops Integration Token
